@@ -1,4 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
+import { useLoaderData } from '@remix-run/react';
+
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,7 +9,13 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export function loader() {
+  return { value: { hello: 'world' }, test: true };
+}
+
 export default function Index() {
+  const { value, test } = useLoaderData<typeof loader>();
+
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="flex flex-col items-center gap-16">
